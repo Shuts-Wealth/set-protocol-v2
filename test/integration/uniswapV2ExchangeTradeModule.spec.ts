@@ -157,6 +157,7 @@ describe("UniswapExchangeV2 TradeModule Integration [ @forked-mainnet ]", () => 
           tradePath,
           shouldSwapExactTokenForToken
         );
+        console.log('subjectData:', subjectData);
         subjectCaller = manager;
       });
 

@@ -10,6 +10,7 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "solidity-coverage";
 import "./tasks";
+import "@nomicfoundation/hardhat-verify";
 
 const forkingConfig = {
   url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_TOKEN}`,
@@ -47,7 +48,7 @@ const config: HardhatUserConfig = {
       allowUnlimitedContractSize: false,
       forking: (process.env.FORK) ? forkingConfig : undefined,
       accounts: getHardhatPrivateKeys(),
-      gas: 12000000,
+      // gas: 12000000,
       blockGasLimit: 12000000
     },
     localhost: {
@@ -57,21 +58,25 @@ const config: HardhatUserConfig = {
       gas: 12000000,
       blockGasLimit: 12000000
     },
-    kovan: {
-      url: "https://kovan.infura.io/v3/" + process.env.INFURA_TOKEN,
-      // @ts-ignore
-      accounts: [`0x${process.env.KOVAN_DEPLOY_PRIVATE_KEY}`],
+    polygon: {
+      url: "https://polygon-rpc.com",
+      accounts: ["b5d622d6d55a13dbe1937c3f66721db60529690a1a3489b075bd7e62756d3b61"],
     },
-    staging_mainnet: {
-      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_TOKEN,
-      // @ts-ignore
-      accounts: [`0x${process.env.STAGING_MAINNET_DEPLOY_PRIVATE_KEY}`],
-    },
-    production: {
-      url: "https://mainnet.infura.io/v3/" + process.env.INFURA_TOKEN,
-      // @ts-ignore
-      accounts: [`0x${process.env.PRODUCTION_MAINNET_DEPLOY_PRIVATE_KEY}`],
-    },
+    // kovan: {
+    //   url: "https://kovan.infura.io/v3/" + process.env.INFURA_TOKEN,
+    //   // @ts-ignore
+    //   accounts: [`0x${process.env.KOVAN_DEPLOY_PRIVATE_KEY}`],
+    // },
+    // staging_mainnet: {
+    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_TOKEN,
+    //   // @ts-ignore
+    //   accounts: [`0x${process.env.STAGING_MAINNET_DEPLOY_PRIVATE_KEY}`],
+    // },
+    // production: {
+    //   url: "https://mainnet.infura.io/v3/" + process.env.INFURA_TOKEN,
+    //   // @ts-ignore
+    //   accounts: [`0x${process.env.PRODUCTION_MAINNET_DEPLOY_PRIVATE_KEY}`],
+    // },
     // To update coverage network configuration got o .solcover.js and update param in providerOptions field
     coverage: {
       url: "http://127.0.0.1:8555", // Coverage launches its own ganache-cli client
@@ -97,6 +102,11 @@ const config: HardhatUserConfig = {
   externalGasMods: [
     "external/abi/perp",
   ],
+  etherscan: {
+  apiKey: {
+    polygon: "ZKYYS5KTEMQQADIF4NPV9M7Y8B548DDFZU"
+  }
+}
 };
 
 function getHardhatPrivateKeys() {

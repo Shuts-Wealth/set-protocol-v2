@@ -208,4 +208,12 @@ describe("UniswapV3IndexExchangeAdapter", () => {
       expect(encodedFeeData).to.eq(expectedEncodedFeeData);
     });
   });
+
+  describe("constructFeesData output", () => {
+    it("should log the encoded fee data for 500 (0.05%)", () => {
+      const poolFeesPercentage = BigNumber.from(500); // 0.05% fee
+      const subjectData = constructFeesData(poolFeesPercentage);
+      console.log('constructFeesData(500):', subjectData);
+    });
+  });
 });
